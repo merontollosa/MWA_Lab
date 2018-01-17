@@ -1,0 +1,18 @@
+
+Answer #1
+setImmediate callbacks are called after I/O Queue callbacks are finished 
+or timed out. setImmediate callbacks are placed in Check Queue, which are processed after I/O Queue.
+
+setTimeout(fn, 0) callbacks are placed in Timer Queue and will be called after I/O 
+callbacks as well as Check Queue callbacks. As event loop, process the timer queue first in each iteration, 
+so which one will be executed first depends on which phase event loop is.
+
+Answer #2
+
+Use setImmediate if you want to queue the function behind whatever I/O event callbacks 
+that are already in the event queue. Use process.nextTick to effectively queue the function at the head of 
+the event queue so that it executes immediately after the current function completes.
+
+So in a case where you're trying to break up a long running, CPU-bound job using recursion, 
+you would now want to use setImmediate rather than process.nextTick to queue the next iteration 
+as otherwise any I/O event callbacks wouldn't get the chance to run between iterations.
