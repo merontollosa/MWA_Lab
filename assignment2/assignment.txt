@@ -16,3 +16,16 @@ the event queue so that it executes immediately after the current function compl
 So in a case where you're trying to break up a long running, CPU-bound job using recursion, 
 you would now want to use setImmediate rather than process.nextTick to queue the next iteration 
 as otherwise any I/O event callbacks wouldn't get the chance to run between iterations.
+
+Answer #3
+
+1.  global.Date                                 
+2.  global.JSON                                 
+3.  global.Math                                 
+4.  global.Number                              
+5.  global.Set                                  
+6.  global.String                               
+7.  global.clearInterval                       
+8.  global.cluster                              
+9.  global.crypto                               
+10. global.events
