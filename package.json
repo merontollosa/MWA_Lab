@@ -1,0 +1,26 @@
+{
+  "name": "mwa_lab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "module1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/merontollosa/MWA_Lab.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/merontollosa/MWA_Lab/issues"
+  },
+  "homepage": "https://github.com/merontollosa/MWA_Lab#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "moment": "^2.20.1"
+  },
+  "devDependencies": {
+    "jasmine-node": "^1.14.5"
+  }
+}
