@@ -1,0 +1,212 @@
+Tutorial on Node.jsIntroductionEventsGeneratorsData ConnectivityUsing Jasmine
+The below code shows how we can write data to the file.
+
+Node js Streams Tutorial: Filestream, Pipes
+
+var fs = require("fs");
+var stream;
+stream = fs.createWriteStream("D://data.txt");
+
+stream.write("Tutorial on Node.js")
+stream.write("Introduction")
+stream.write("Events")
+stream.write("Generators")
+stream.write("Data Connectivity")
+stream.write("Using Jasmine") 
+Code Explanation:-
+
+We are creating a writable stream by using the method – createWriteStream. As an input, we give the location of our data.txt file.
+Next we used the stream.write a method to write the different lines of text to our text file. The stream will take care of writing this data to the data.txt file.
+If you open the data.txt file, you will now see the following data in the file
+
+Tutorial on Node.js
+
+Introduction
+
+Events
+
+Generators
+
+Data Connectivity
+
+Using Jasmine
+
+Pipes in Node.js
+Within Node applications, streams can be piped together using the pipe() method, which takes two arguments:
+
+A Required writable stream that acts as the destination for the data and
+An optional object used to pass in options.
+A typical example of using pipes, if you want to transfer data from one file to the other.
+
+So let's see an example of how we can transfer data from one file to the other using pipes.
+
+Step 1) Create a file called datainput.txt which has the below data. Let assume this file is stored on the D drive of our local machine.
+
+Tutorial on Node.js
+
+Introduction
+
+Events
+
+Generators
+
+Data Connectivity
+
+Using Jasmine
+
+Step 2) Create a blank empty file called dataOutput.txt and placed it on the D drive of your local machine.
+
+Step 3) Write the below code to carry out the transfer of data from the datainput.txt file to the dataOutput.txt file.
+
+Node js Streams Tutorial: Filestream, Pipes
+
+Code Explanation:-
+
+We are first creating a "readstream" to our datainput.txt file which contains all our data which needs to be transferred to the new file.
+We then need to create a "writestream" to our dataOutput.txt file, which is our empty file and is the destination for the transfer of data from the datainput.txt file.
+We then use the pipe command to transfer the data from the readstream to the write stream. The pipe command will take all the data which comes into the readstream, and push it to the writestream.
+If you now open the dataOutput.txt file, you will see all the data which was present in the datainput.txt file.
+
+Events in Node.js
+Events are one of the key concepts in Node.js and sometimes Node.js is referred to as an Event-driven framework.
+
+Basically, an event is something that happens. For example, if a connection is established to a database, then the database connection event is triggered. Event driven programming is to create functions that will be triggered when specific events are triggered.
+
+Let's look at a basic example of defining an event in Node.js.
+
+We are going to create an event called 'data_received'. When this event is triggered, the text "data received" will be sent to the console.
+
+Node js Streams Tutorial: Filestream, Pipes
+
+var events = require('events');
+var eventEmitter = new events.EventEmitter();
+eventEmitter.on('data_received', function() {
+    console.log('data received succesfully.');
+});
+
+eventEmitter.emit('data_received'); 
+Code Explanation:-
+
+Use the require function to include the 'events' module. With this module, you will be able to create events in Node.js.
+Create a new events emitter. This is used to bind the event, which in our case is "data_received" to a callback function which is defined in step3.
+We define an event-driven function which says that if in case the "data_received" event is triggered then we should output the text "data_received" to the console.
+Finally, we do have a manual trigger of our event using the eventEmiter.emit function. This will trigger the data_received event.
+When the program is run, the text "data received" will be sent to the console as shown below.
+
+Node js Streams Tutorial: Filestream, Pipes
+
+Emitting Events
+When defining events, there are different methods for events which can be invoked. This topic focuses on looking at each one of them in detail.
+
+One time event handlers
+Sometimes you may be interested in reacting to an event only the first time it occurs. In these situations, you can use the once() method.
+
+Let's see how we can make use of the once method for event handlers.
+
+Node js Streams Tutorial: Filestream, Pipes
+
+Code Explanation:-
+
+Here we are using the 'once' method to say that for the event 'data_received,' the callback function should only be executed once.
+Here we are manually triggering the 'data_received' event.
+When the 'data_received' event is triggered again, this time, nothing will happen. This is because of the first step where we said that the event could only be triggered once.
+If the code is executed properly, the output in the log will be 'data_received successfully'. This message will only appear once in the console.
+
+Inspecting Event Listeners
+At any point in its lifetime, an event emitter can have zero or more listeners attached to it. The listeners for each event type can be inspected in several ways.
+
+If you are interested in only determining the number of attached listeners, then look no further than the EventEmitter.listenerCount() method.
+
+(Note: Listeners are important because the main program should know if listeners are being added on the fly to an event, else the program will malfunction because additional listeners will get called.)
+
+Node js Streams Tutorial: Filestream, Pipes
+
+Code Explanation:-
+
+We are defining an eventEmitter type which is required for using the event-related methods.
+We are then defining an object called emitter which will be used to define our event handlers.
+We are creating 2 events handlers which basically do nothing. This is kept simple for our example just to show how the listenerCount method works.
+Now when you invoke the listenerCount method on our data_received event, it will send the number of event listeners attached to this event in the console log.
+If the code is executed properly, the value of 2 will be shown in the console log.
+
+The newListener Event
+Each time a new event handler is registered, the event emitter emits a newListener event. This event is used to detect new event handlers. You typically use newListener event when you need to allocate resources or perform some action for each new event handler.
+
+Node js Streams Tutorial: Filestream, Pipes
+
+var events = require('events');
+var eventEmitter = events.EventEmitter;
+var emitter = new eventEmitter();
+emitter.on("newListener", function(eventName, listener) {
+    console.log("Added listener for " + eventName + " events");
+});
+emitter.on('data_received', function() {});
+emitter.on('data_received', function() {}); 
+Code Explanation:-
+
+We are creating a new event handler for the 'newListener' event. So whenever a new event handler is registered, the text "Added listener for" + the event name will be displayed in the console.
+Here we are writing to the console the text "Added listener for" + the event name for each event registered.
+We are defining 2 event handlers for our event 'data_received'.
+If the above code is executed properly, the below text will be shown in the console. It just shows that the 'newListener' event handler was triggered twice.
+
+Added listener for data_received events
+
+Added listener for data_received events
+
+Summary
+Streams are used in Node.js to read and write data from Input-Output devices. Node.js makes use of the 'fs' library to create readable and writable streams to files. These streams can be used to read and write data from files.
+Pipes can be used to connect multiple streams together. One of the most common example is to pipe the read and write stream together for the transfer of data from one file to the other.
+Node.js is often also tagged as an event driven framework, and it's very easy to define events in Node.js. Functions can be defined which respond to these events.
+Events also expose methods for responding to key events. For example, we have seen the once() event handler which can be used to make sure that a callback function is only executed once when an event is triggered.
+ 
+
+ Prev Report a Bug Next 
+YOU MIGHT LIKE:
+NODE-JS
+ 
+Node.js Unit Testing Tutorial with Jasmine
+Testing is a key element to any application. For Node.js, the framework available for Testing is...
+
+Read more
+NODE-JS
+ 
+Node.js NPM Tutorial: Create, Publish, Extend & Manage
+A module in Node.js is a logical encapsulation of code in a single unit. It's always a good...
+
+Read more
+NODE-JS
+ 
+Node.js Express FrameWork Tutorial - Learn in 10 Minutes
+In this tutorial, we will also have a look at the express framework. This framework is built in...
+
+Read more
+NODE-JS
+ 
+Node.js Generators & Compare with Callbacks
+In this tutorial, we are going to learn about Generators and their differences with Callbacks What...
+
+Read more
+NODE-JS
+ 
+Node.js MongoDB Tutorial with Examples
+Mostly all modern day web applications have some sort of data storage system at the backend to...
+
+Read more
+NODE-JS
+ 
+How to Download & Install Node.js - NPM on Windows
+To start building your Node.js applications, the first step is the installation of the node.js...
+
+Read more
+Node.js Tutorial
+1) Introduction to Node.js
+2) Download & Install Node.js
+3) Node.js Modules
+4) Node.js Http Tutorial
+5) Node.js Express
+6) Node.js MongoDB
+7) Node.js Promise
+8) Bluebird Promises
+9) Generators & Compare Callbacks
+10) Filestream, Pipes
+11) Node.js Testing with Jasmine

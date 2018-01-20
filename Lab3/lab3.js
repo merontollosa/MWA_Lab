@@ -1,3 +1,5 @@
+import { WriteStream } from 'fs';
+
 
 
 // Lab 1 Answer!!!!!!!!
@@ -8,15 +10,15 @@ var mum = dns.lookup('https://online.cs.mum.edu/portal', function (err,addresses
 
 //Lab 2 Answer!!!!!!!!
 
-/*var fs = require("fs");
+var fs = require("fs");
 var http = require('http');
 
 var server = http.createServer();
 server.on('request',function (req, res) { 
     var stream = fs.createReadStream("D:\\MWA\\StreamFile\\viber image.jpg");
     stream.pipe(res);
-});*/
-//server.listen(8000, ()=>console.log('Server running'));
+});
+server.listen(8000, ()=>console.log('Server running'));
 
 //Lab  3 Answer !!!!!!!!!!!!!!!!!
 
@@ -28,19 +30,39 @@ class Clock extends EventEmitter{
     super();
     console.log('Hiiii');
     var self = this;
-    setInterval(function(){ self.emit('tick');},1000);        
+    setInterval(()=>{ self.emit('tick');},1000);        
   }
 
 }
 
 var timer = new Clock();
-timer.on("tick", function() {
+timer.on("tick", ()=>{
     console.log("Woohoop!!!!!!!!!!!");
 });
 
 
+//Lab Qn 4 
+var fs = require("fs"),
+    zlib = require("zlib"),
+    filename = "./input.txt",
+    compress = zlib.createGzip(),//compressing
+    decompress = zlib.createGunzip(),
+    readStream = fs.createReadStream(filename);
 
-  
+
+function compressfile(filename){
+  var newfilename = filename+".gz",
+   writeStream = fs.createWriteStream(newfilename);
+  readStream.pipe(compress).pipe(writeStream);
+}
+
+function decompressfile(filename){
+  var newfilename = filename.replace(".gz",""),
+  writeStream = fs.createWriteStream(newfilename);
+  readStream.pipe(decompress).pipe(writeStream);
+}
+
+  decompressfile(filename);
 
 
 
