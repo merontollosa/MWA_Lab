@@ -8,14 +8,14 @@ var mum = dns.lookup('https://online.cs.mum.edu/portal', function (err,addresses
 
 //Lab 2 Answer!!!!!!!!
 
-var fs = require("fs");
+/*var fs = require("fs");
 var http = require('http');
 
 var server = http.createServer();
 server.on('request',function (req, res) { 
     var stream = fs.createReadStream("D:\\MWA\\StreamFile\\viber image.jpg");
     stream.pipe(res);
-});
+});*/
 //server.listen(8000, ()=>console.log('Server running'));
 
 //Lab  3 Answer !!!!!!!!!!!!!!!!!
@@ -26,16 +26,18 @@ class Clock extends EventEmitter{
   
   constructor(){
     super();
-    this.message='woohoop!'
-             this.on('tick',()=>{concole.log("message" + this.message);})
+    console.log('Hiiii');
+    var self = this;
+    setInterval(function(){ self.emit('tick');},1000);        
   }
 
 }
 
 var timer = new Clock();
-timer.on.bind("tick", function() {
+timer.on("tick", function() {
     console.log("Woohoop!!!!!!!!!!!");
 });
+
 
 
   
