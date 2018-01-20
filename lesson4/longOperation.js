@@ -5,7 +5,7 @@ const { fork } = require('child_process');
 server.on('request', (req, res) => {
    const childProcess=fork('longOperation.js');
 childProcess.send('start');
-childProcess.on('message' ,sum => {
+childProcess.on('message' ,longOperation => {
     res.end(`Sum is ${sum}`);
 });
 
