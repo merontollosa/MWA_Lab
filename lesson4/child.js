@@ -1,0 +1,4 @@
+const readFile = (reqPath) => {
+   
+
+}
