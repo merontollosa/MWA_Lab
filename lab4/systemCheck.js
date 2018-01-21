@@ -3,7 +3,7 @@ async function systemCheck(){
     try{
         console.log('Checking Your System...');
          await check();
-         console.log('The System is Checked Secsessfuly!');
+        
     }catch(error){
         console.log(error);
     }
@@ -12,8 +12,11 @@ systemCheck();
 
 function check(){
    if(os.cpus().size<4294967296)
-   console.log("not");
+   console.log("Sorry, This app needs at least 4GB of RAM");
    if(os.cpus().length<2)
-   console.log("not suported");
+   console.log("Sorry, Prosesser is not Supported");
+   else{
+    console.log('The System is Checked Secsessfuly!');
+   }
 
 }
