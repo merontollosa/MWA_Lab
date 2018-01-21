@@ -1,14 +1,12 @@
+
 const Rx = require('@reactivex/rxjs');
+const os= require('os');
 
-var source = Rx.Observable.create(function(observer){
-    observer.next('CS572');
-   // observer.error('Error');
-    observer.complete();
-    
-});
-var subscriotion = source.subscribe(function(x){console.log(x)},
-                                 function(err){console.log(err)},
-                                 function(){console.log(console.info('Done!'));
-                                });
+const myPromises = new Promise(function(resolve, reject){
+    if(os.cpus().size > 4294967296 && os.cpus().size < 4294967296) resolve('The System is Checked Secsessfuly!');
+    if(os.cpus().size < 4294967296) reject('Sorry, This app needs at least 4GB of RAM');
+   if(os.cpus().length < 2) reject('The System is Checked Secsessfuly!');
+   })
 
-    subscriotion.unsubscribe();
+var source = Rx.Observable.fromPromise(myPromises)
+               .subscribe(e=>console.log(e));
