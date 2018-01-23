@@ -1,0 +1,13 @@
+use library
+db.book.insert({
+... "isbn" : "IBSN123",
+...  "category" :{
+...         "author" :"Dana",
+...          "tag"  : "Technology"
+...      },
+... borrowInfo :{
+...          "StudentName" : "Meron",
+...           "returnDate" :"30/1/18"
+... }
+... })
+db.restaurants.find({}, {}).pretty();
