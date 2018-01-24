@@ -1,13 +1,14 @@
-use library
-db.book.insert({
-... "isbn" : "IBSN123",
-...  "category" :{
-...         "author" :"Dana",
-...          "tag"  : "Technology"
-...      },
-... borrowInfo :{
-...          "StudentName" : "Meron",
-...           "returnDate" :"30/1/18"
-... }
-... })
-db.restaurants.find({}, {}).pretty();
+Books {
+        "_id" : ObjectId("59b8380518133a38384d1a15"),
+        "ISBN" : NumberLong(12343),
+        "author" : "John Doe",
+        "title" : "Dreamers",
+        "keyWords" : ["psychology", "human kind", "prosperity"],
+        "student" : {
+                "studentID" : "987654",
+                "fullName" : "Bob Smith",
+                "phoneNo" : 123456789,
+                "borwedDate" : ISODate("2017-08-24T00:00:00Z"),
+                "returnDate" : ISODate("2017-09-11T00:00:00Z")
+        }
+}
