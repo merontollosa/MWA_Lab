@@ -11,7 +11,7 @@ router.post('/', function(req, res, next) {
     
     var query ={$and:[{category:req.body.category},{"location.category":{$near:[long,lat]}}]}; 
 
-    req.dbs.collection('locCollection').find(query).toArray(function(err, result) {
+    req.dbs.collection('location').find(query).toArray(function(err, result) {
         if (err) throw err;
         //console.dir(result);
         res.render('searchResult',{title:"Location App",places:result});
