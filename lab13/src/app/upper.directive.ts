@@ -7,8 +7,8 @@ import { HostBinding } from '@angular/core/src/metadata/directives';
   selector: '[appUpper]'
 })
 export class UpperDirective {
-   
-  constructor( private e1: ElementRef){ 
+  
+  constructor(private e1: ElementRef){ 
    this.upper();
   }
 
@@ -16,5 +16,3 @@ export class UpperDirective {
    this.e1.nativeElement.style.textTransform = "uppercase"
  }
 }
-
-

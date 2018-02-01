@@ -6,6 +6,7 @@ import { Directive, Input, ElementRef } from '@angular/core';
 })
 export class MyvisibliltyDirective {
 @Input() val: boolean;
+
 constructor(private e1 : ElementRef){
  
   this.ishidden(this.val);
